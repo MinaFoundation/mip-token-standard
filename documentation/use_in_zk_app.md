@@ -9,20 +9,26 @@ Interacting with tokens from a zkApp is as simple as writing off-chain code (sam
 previous chapter is executed from within zkApp methods):
 
 ```ts
+import {
+    SmartContract, state, State, method, DeployArgs, PublicKey, UInt64
+} from 'o1js';
+
+import { FungibleToken } from 'mina-fungible-token';
+
 export class TokenEscrow extends SmartContract {
   @state(PublicKey)
   tokenAddress = State<PublicKey>()
   @state(UInt64)
   total = State<UInt64>()
 
-  deploy(args: DeployArgs & { tokenAddress: PublicKey }) {
+  async deploy(args: DeployArgs & { tokenAddress: PublicKey }) {
     super.deploy(args)
     this.tokenAddress.set(args.tokenAddress)
     this.total.set(UInt64.zero)
   }
 
   @method
-  deposit(from: PublicKey, amount: UInt64) {
+  async deposit(from: PublicKey, amount: UInt64) {
     const token = new FungibleToken(this.tokenAddress.getAndRequireEquals())
     token.transfer(from, this.address, amount)
     const total = this.total.getAndRequireEquals()
@@ -30,7 +36,7 @@ export class TokenEscrow extends SmartContract {
   }
 
   @method
-  withdraw(to: PublicKey, amount: UInt64) {
+  async withdraw(to: PublicKey, amount: UInt64) {
     const token = new FungibleToken(this.tokenAddress.getAndRequireEquals())
     const total = this.total.getAndRequireEquals()
     total.greaterThanOrEqual(amount)
