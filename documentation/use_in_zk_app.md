@@ -9,11 +9,9 @@ Interacting with tokens from a zkApp is as simple as writing off-chain code (sam
 previous chapter is executed from within zkApp methods):
 
 ```ts
-import {
-    SmartContract, state, State, method, DeployArgs, PublicKey, UInt64
-} from 'o1js';
+import { DeployArgs, method, PublicKey, SmartContract, State, state, UInt64 } from "o1js"
 
-import { FungibleToken } from 'mina-fungible-token';
+import { FungibleToken } from "mina-fungible-token"
 
 export class TokenEscrow extends SmartContract {
   @state(PublicKey)
