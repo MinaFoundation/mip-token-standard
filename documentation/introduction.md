@@ -5,7 +5,7 @@ can be found on [github](https://github.com/MinaFoundation/mina-fungible-token),
 [npm package](https://www.npmjs.com/package/mina-fungible-token).
 
 The fungible token standard uses Mina's native support for custom tokens (see
-[MIP-4](https://github.com/MinaProtocol/MIPs/blob/main/MIPS/mip-0004-zkapps.md)). An
+[MIP-4](https://github.com/MinaProtocol/MIPs/blob/main/MIPS/mip-0004-zkapps.md#token-mechanics)). An
 account on Mina can be created to hold either Mina, or a custom token.
 
 To create a new token, one creates a smart contract, which becomes the owner for the token, and uses
